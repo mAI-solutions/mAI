@@ -22,7 +22,7 @@ const Post = ({ title, desc, ago, siteName, img }) => {
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section>
         <a {...linkProps}>
-          <Image src={img} height={180} />
+          <Image src={img} height={120} />
         </a>
       </Card.Section>
 

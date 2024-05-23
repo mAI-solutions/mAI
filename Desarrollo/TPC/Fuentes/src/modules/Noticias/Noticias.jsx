@@ -1,6 +1,5 @@
-import { Stack, ScrollArea } from '@mantine/core';
+import ScrollStack from '../../components/ScrollStack'
 import Post from './Post';
-import classes from './Noticias.module.css';
 
 const data = [
   {
@@ -42,13 +41,11 @@ const data = [
 
 const Noticias = () => {
   return (
-    <ScrollArea h={'420'} classNames={classes} >
-      <Stack gap='lg' className={classes.stack}>
-        {data.map((post, index) => (
-          <Post key={index} {...post} />
-        ))}
-      </Stack>
-    </ScrollArea>
+    <ScrollStack>
+      {data.map((post, index) => (
+        <Post key={index} {...post} />
+      ))}
+    </ScrollStack>
   )
 }
 
