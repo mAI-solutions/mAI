@@ -1,0 +1,10 @@
+.root {
+  background-color: var(--mantine-color-dark-8);
+  padding: 0px 15px;
+  border: 1px solid var(--mantine-color-dark-6);
+  border-radius: 7px;
+}
+
+.stack {
+  padding: 15px 0px;
+}

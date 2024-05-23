@@ -1,28 +1,35 @@
-.App {
-  text-align: center;
+body {
+  overflow-y: hidden;
+  padding: 0px;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */  
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.app {
+  width: 400px;
+  height: 600px;
+  padding: 0px 20px;
 }
 
-.App-title {
-  font-size: 1.5em;
+.content {
+  padding: 0px;
 }
 
-.App-intro {
-  font-size: large;
+.header {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.logo {
+  width: 40px;
 }
