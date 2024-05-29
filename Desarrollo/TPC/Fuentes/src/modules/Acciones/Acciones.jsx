@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import { Select, Group } from '@mantine/core'
-import { IconBellRinging, IconExternalLink, IconCheck } from '@tabler/icons-react'
+import { Modal } from '@mantine/core'
+import AccionCard from './AccionCard'
+import ScrollStack from '../../components/ScrollStack'
+import { IconBellRinging, IconExternalLink } from '@tabler/icons-react'
 
 const acciones = {
   'Notificación': {
@@ -13,43 +14,50 @@ const acciones = {
   }
 }
 
-const iconProps = {
-  stroke: 1.5,
-  color: 'currentColor',
-  opacity: 0.6,
-  size: 18,
-};
-
-const renderSelectOption = ({ option, checked }) => {
-  const { desc, Icon } = acciones[option.value]
-  return (
-    <Group flex={1}>
-      <Group gap="xs">
-        <Icon style={{ marginInlineEnd: 'auto' }} {...iconProps} />
-        {/* {option.label} */}
-        <div>
-          <div>{option.label}</div>
-          <div style={{ fontSize: '0.8em', opacity: 0.6 }}>{desc}</div>
-        </div>
-      </Group>
-      {checked && <IconCheck style={{ marginInlineStart: 'auto' }} {...iconProps} />}
-    </Group>
-  )
-}
+const data = [
+  {
+    name: 'Recordatorio de reunión',
+    stats: [
+      { title: 'Inicia', value: '21/05' },
+      { title: 'Repeticiones', value: 'Indefinidas' },
+      { title: 'Intervalo', value: 'Semanal' }
+    ]
+  },
+  {
+    name: 'Recordatorio de cumpleaños',
+    stats: [
+      { title: 'Inicia', value: '03/11' },
+      { title: 'Repeticiones', value: 'Indefinidas' },
+      { title: 'Intervalo', value: 'Anual' }
+    ]
+  },
+  {
+    name: 'Recordatorio de pago',
+    stats: [
+      { title: 'Inicia', value: '13/05' },
+      { title: 'Repeticiones', value: 12 },
+      { title: 'Intervalo', value: 'Mensual' }
+    ]
+  },
+  {
+    name: 'Recordatorio de cita médica',
+    stats: [
+      { title: 'Inicia', value: '15/05' },
+      { title: 'Repeticiones', value: 4 },
+      { title: 'Intervalo', value: 'Semanal' }
+    ]
+  }
+]
 
 const Acciones = () => {
-  const [accion, setAccion] = useState('Notificación')
-
   return (
-    <>
-      <Select 
-        label='Elige una acción'
-        data={['Notificación', 'Abrir enlace']}
-        renderOption={renderSelectOption}
-        value={accion}
-        onChange={setAccion}
-      />
-    </>
+    <ScrollStack>
+      {
+        data.map((action, index) => (
+          <AccionCard key={index} accion={action} />
+        ))
+      }
+    </ScrollStack>
   )
 }
 
