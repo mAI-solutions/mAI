@@ -1,4 +1,4 @@
-# mAI Solutions 🤖💻
+<h1 align="center">mAI Solutions 🤖💻</h1>
 
 ## Descripción
 mAI Solutions es una empresa peruana líder en el desarrollo y aplicación de soluciones de software basadas en la web, empleando herramientas de inteligencia artificial (IA). Nos especializamos en ofrecer servicios innovadores y personalizados que aprovechan al máximo el poder de la IA para resolver problemas comerciales complejos en entornos web.
