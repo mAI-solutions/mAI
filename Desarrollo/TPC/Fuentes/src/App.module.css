@@ -17,19 +17,5 @@ body {
 .app {
   width: 400px;
   height: 600px;
-  padding: 0px 20px;
-}
-
-.content {
-  padding: 0px;
-}
-
-.header {
-  display: flex;
-  justify-content: center;
-  padding: 30px;
-}
-
-.logo {
-  width: 40px;
+  padding: 0px 0px;
 }

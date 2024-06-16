@@ -1,6 +1,5 @@
 import { Modal } from '@mantine/core'
 import AccionCard from './AccionCard'
-import ScrollStack from '../../components/ScrollStack'
 import { IconBellRinging, IconExternalLink } from '@tabler/icons-react'
 
 const acciones = {
@@ -51,13 +50,13 @@ const data = [
 
 const Acciones = () => {
   return (
-    <ScrollStack>
-      {
-        data.map((action, index) => (
-          <AccionCard key={index} accion={action} />
-        ))
-      }
-    </ScrollStack>
+    <>
+    {
+      data.map((action, index) => (
+        <AccionCard key={index} accion={action} />
+      ))
+    }
+    </>
   )
 }
 
