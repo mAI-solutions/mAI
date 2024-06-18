@@ -4,7 +4,7 @@ const login = async (username, password) => {
   const response = { user: null }
   try {
     const user = await pb.collection('users').authWithPassword(username, password)
-    response.user = user
+    response.user = user.record
   }
   catch (error) {
     response.error = error
@@ -12,22 +12,16 @@ const login = async (username, password) => {
   return response
 }
 
-const logout = async () => {
+const logout = () => {
   pb.authStore.clear()
 }
 
-const doesExist = async (username) => {
-  const user = await pb.collection('users').getFirstListItem(`username="${username}"`)
-  return user !== null
-}
-
-const isLogged = () => {
-  return pb.authStore.isValid
+const storedUser = () => {
+  return pb.authStore.model
 }
 
 export default {
   login,
   logout,
-  doesExist,
-  isLogged
+  storedUser
 }

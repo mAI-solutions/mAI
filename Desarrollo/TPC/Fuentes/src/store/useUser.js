@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import userService from '../services/user'
 
 const useUser = create(set => ({
-  user: null,
+  user: userService.storedUser(),
   login: async ({ username, password }) => {
     const { user, error } = await userService.login(username, password)
     if (error) {

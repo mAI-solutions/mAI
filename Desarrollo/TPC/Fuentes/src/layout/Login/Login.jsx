@@ -45,7 +45,9 @@ const Login = () => {
             }
             if (error.data.code === 400) {
               form.setFieldError('username', 'Usuario o contraseña incorrectos')
+              return
             }
+            form.setFieldError('username', 'Ha ocurrido un error inesperado')
           })}
         >
           <Stack gap={8}>
