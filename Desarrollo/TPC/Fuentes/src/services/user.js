@@ -1,14 +1,19 @@
 import pb from './pb'
 
 const login = async (username, password) => {
-  console.log({ username, password })
-  const authData = await pb.collection('users').authWithPassword(username, password)
-  console.log(authData)
+  const response = { user: null }
+  try {
+    const user = await pb.collection('users').authWithPassword(username, password)
+    response.user = user
+  }
+  catch (error) {
+    response.error = error
+  }
+  return response
 }
 
 const logout = async () => {
   pb.authStore.clear()
-  console.log(pb.authStore)
 }
 
 const doesExist = async (username) => {

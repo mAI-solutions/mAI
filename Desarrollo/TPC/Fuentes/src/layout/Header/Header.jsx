@@ -3,7 +3,7 @@ import MenuBurger from './MenuBurger'
 import ModuleSelect from "./ModuleSelect"
 import UserOptions from "./UserOptions"
 
-import useGUIData from '../../store/useGUIData'
+import useGUIData from '../../store/useGUI'
 
 import {
   Group,
