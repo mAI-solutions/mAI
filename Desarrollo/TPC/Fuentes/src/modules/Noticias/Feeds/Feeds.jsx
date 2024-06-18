@@ -26,33 +26,56 @@ import { useState } from 'react'
 import {
   ActionIcon,
   Stack,
-  Group,
   ScrollArea,
-  Card,
   Affix,
-  TextInput,
-  Modal,
-  Text,
-  Button
 } from '@mantine/core'
 
 import {
-  useDisclosure  
+  useDisclosure,
 } from '@mantine/hooks'
 
 import {
   IconPlus,
-  IconTrash
 } from '@tabler/icons-react'
+
+import FeedEditor from './FeedEditor'
+import FeedCard from './FeedCard'
 
 const Feeds = () => {
   const [feeds, setFeeds] = useState(data)
-  const [newUrl, setNewUrl] = useState('')
-  const [modalOpened, { open: modalOpen, close: modalClose }] = useDisclosure(false)
+  const [
+    modalOpened, 
+    { open: modalOpen, close: modalClose }
+  ] = useDisclosure(false)
 
   return (
     <>
-      
+      <ScrollArea>
+        <Stack
+          py={20}
+          px={20}
+        >
+          {feeds.map((feed) => (
+            <FeedCard 
+              key={feed.url}
+              feed={feed}
+              onDelete={() => {
+                const newFeeds = feeds.filter((f) => f.url !== feed.url)
+                setFeeds(newFeeds)
+              }}
+              onEdit={(newFeed) => {
+                const newFeeds = feeds.map((f) => {
+                  if (f.url === feed.url) {
+                    return newFeed
+                  }
+                  return f
+                })
+                setFeeds(newFeeds) 
+              }}
+            />
+          ))}
+        </Stack>   
+      </ScrollArea>
       <Affix position={{ bottom: 20, right: 20 }}>
         <ActionIcon
           color='default'
@@ -64,82 +87,15 @@ const Feeds = () => {
           <IconPlus size={15}/>
         </ActionIcon>
       </Affix>
-      <Modal 
-        opened={modalOpened} 
+      <FeedEditor
+        opened={modalOpened}
         onClose={modalClose}
-        centered
-        withCloseButton={false}
-      >
-        <Stack>
-          <TextInput 
-            label='URL del feed'
-            placeholder='https://www.ejemplo.com'
-            value={newUrl}
-            onChange={(e) => setNewUrl(e.target.value)}
-          />
-          <Group justify='space-between'>
-            <Button
-              variant='default'
-              aria-label="Cancelar"
-              onClick={modalClose}
-            >
-              Cancelar
-            </Button>
-            <Button
-              variant='filled'
-              aria-label="Añadir feed"
-              onClick={() => {
-                setFeeds([ { siteName: newUrl, url: newUrl }, ...feeds])
-                setNewUrl('')
-                modalClose()
-              }}
-            >
-              Añadir
-            </Button>
-          </Group>
-        </Stack>
-      </Modal>
-      <ScrollArea>
-        <Stack
-          py={20}
-          px={20}
-        >
-          {feeds.map((feed) => (
-            <Card
-              key={feed.url}
-            >
-              <Group justify='space-between'>
-                <div>
-                  <Text>
-                    {feed.siteName}
-                  </Text>
-                  <Text 
-                    size="xs" 
-                    c="dimmed" 
-                    onClick={() => window.open(feed.url, '_blank')}
-                    style={{ cursor: 'pointer' }}
-                    title='Ir al sitio'
-                  >
-                    {feed.url}
-                  </Text>
-                </div>
-                <ActionIcon
-                  aria-label="Eliminar feed"
-                  title="Eliminar feed"
-                  variant='transparent'
-                  color='default'
-                  onClick={() => {
-                    const newFeeds = feeds.filter((f) => f.url !== feed.url)
-                    setFeeds(newFeeds)
-                  }}
-                >
-                  <IconTrash size={15}/>
-                </ActionIcon>
-              </Group>
-            </Card>
-          ))}
-        </Stack>   
-      </ScrollArea>     
+        sendLabel='Añadir'
+        onSend={(url) => {
+          setFeeds([ { siteName: 'New Feed', url }, ...feeds])
+          modalClose()
+        }}
+      />
     </>
   )
 }

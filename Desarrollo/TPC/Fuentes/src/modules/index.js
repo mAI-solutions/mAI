@@ -15,7 +15,7 @@ import Redaccion from './Redaccion'
 export default {
   children: {
     'noticias': {
-      label: 'Feed de noticias',
+      label: 'Feeds de noticias',
       desc: 'Las últimas novedades de tus sitios favoritos',
       Icon: IconRss,
       component: Noticias,

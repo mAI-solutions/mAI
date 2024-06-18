@@ -14,7 +14,7 @@ import { useDisclosure } from '@mantine/hooks'
 import useGUIData from '../../../store/useGUIData'
 
 const MenuBurger = () => {
-  const [opened, { close, toggle }] = useDisclosure()
+  const [opened, { close, toggle }] = useDisclosure(false)
   const { currentRoute, setCurrentRoute } = useGUIData()
   const ref = useClickOutside(() => close())
 
@@ -33,7 +33,6 @@ const MenuBurger = () => {
         <Menu.Target>
           <ActionIcon
             ref={ref}
-            opened={opened}
             title={(submenus
               ? 'Menú'
               : canGoBack && 'Atrás'
@@ -58,7 +57,7 @@ const MenuBurger = () => {
         <Menu.Dropdown>
         {
           Object.entries(submenus || []).map(([key, value]) => {
-            console.log(value)
+            // console.log(value)
             return (
               <Menu.Item 
                 key={key}

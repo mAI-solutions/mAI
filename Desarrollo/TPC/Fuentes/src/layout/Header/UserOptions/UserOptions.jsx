@@ -10,7 +10,9 @@ import {
   IconLogout,
 } from '@tabler/icons-react'
 
-import classes from './UserOptions.module.css';
+import user from '../../../services/user'
+
+import classes from './UserOptions.module.css'
 
 const iconProps = {
   style: {
@@ -26,7 +28,7 @@ const UserOptions = ({ size }) => {
   return (
     <Menu
       width={200}
-      offset={25}
+      offset={21}
       position="bottom-end"
       transitionProps={{ transition: 'fade' }}
       onClose={() => setUserMenuOpened(false)}
@@ -47,7 +49,10 @@ const UserOptions = ({ size }) => {
         <Menu.Item leftSection={<IconSettings {...iconProps} />}>
           Ajustes
         </Menu.Item>
-        <Menu.Item leftSection={<IconLogout {...iconProps} />}>
+        <Menu.Item 
+          leftSection={<IconLogout {...iconProps} />}
+          onClick={() => user.logout()}
+        >
           Cerrar sesión
         </Menu.Item>
       </Menu.Dropdown>
