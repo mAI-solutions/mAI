@@ -8,45 +8,28 @@ import {
   Button
 } from '@mantine/core'
 
-const AccionEditor = ({
-  accion,
+const FeedEditor = ({
   opened,
   onClose,
   onSend,
+  url = '',
   sendLabel
 }) => {
-  const [newAccion, setNewAccion] = useState(accion || {
-    title: '',
-    interval: {
-      frequency: 30,
-      unit: 'minutos',
-    },
-    action: {
-      type: 'notification',
-      properties: {
-        message: '',
-      }
-    }
-  })
-
-  console.log(newAccion)
+  const [newUrl, setNewUrl] = useState(url)
 
   return (
     <Modal
-      opened={opened}
+      opened={opened} 
       onClose={onClose}
       centered
       withCloseButton={false}
     >
       <Stack>
         <TextInput 
-          label='Título'
-          placeholder='Mi acción cíclica'
-          value={newAccion.title}
-          onChange={(e) => setNewAccion({
-            ...newAccion,
-            title: e.target.value
-          })}
+          label='URL del feed'
+          placeholder='https://www.ejemplo.com'
+          value={newUrl}
+          onChange={(e) => setNewUrl(e.target.value)}
         />
         <Group justify='space-between'>
           <Button
@@ -60,7 +43,8 @@ const AccionEditor = ({
             variant='filled'
             aria-label={sendLabel}
             onClick={() => {
-              onSend(newAccion)
+              onSend(newUrl)
+              setNewUrl('')
             }}
           >
             {sendLabel}
@@ -71,4 +55,4 @@ const AccionEditor = ({
   )
 }
 
-export default AccionEditor
+export default FeedEditor

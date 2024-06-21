@@ -16,9 +16,9 @@ import {
   IconDots
 } from '@tabler/icons-react'
 
-import AccionEditor from '../AccionEditor'
+import FeedEditor from '../FeedEditor'
 
-const AccionCard = ({ accion, onEdit, onDelete }) => {
+const FeedCard = ({ feed, onEdit, onDelete }) => {
   const [
     modalOpened, 
     { open: modalOpen, close: modalClose }
@@ -26,17 +26,20 @@ const AccionCard = ({ accion, onEdit, onDelete }) => {
   
   return (
     <>
-      <Card>
+      <Card key={feed.url}>
         <Group justify='space-between'>
           <div>
             <Text>
-              {accion.title}
+              {feed.siteName}
             </Text>
             <Text 
               size="xs" 
               c="dimmed" 
+              onClick={() => window.open(feed.url, '_blank')}
+              style={{ cursor: 'pointer' }}
+              title='Ir al sitio'
             >
-              Cada {accion.interval.frequency} {accion.interval.unit} 
+              {feed.url}
             </Text>
           </div>
           <Menu position='bottom-end'>
@@ -67,12 +70,12 @@ const AccionCard = ({ accion, onEdit, onDelete }) => {
           </Menu>
         </Group>
       </Card>
-      <AccionEditor
+      <FeedEditor
         opened={modalOpened}
         onClose={modalClose}
-        accion={accion}
-        onSend={(newAccion) => {
-          onEdit(newAccion)
+        url={feed.url}
+        onSend={(url) => {
+          onEdit({...feed, url})
           modalClose()
         }}
         sendLabel='Actualizar'
@@ -81,4 +84,4 @@ const AccionCard = ({ accion, onEdit, onDelete }) => {
   )
 }
 
-export default AccionCard
+export default FeedCard

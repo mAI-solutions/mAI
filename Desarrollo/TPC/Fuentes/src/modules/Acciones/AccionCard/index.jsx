@@ -1,3 +1,2 @@
-import AccionCard from './AccionCard';
-
-export default AccionCard;
+import AccionCard from './AccionCard'
+export default AccionCard
