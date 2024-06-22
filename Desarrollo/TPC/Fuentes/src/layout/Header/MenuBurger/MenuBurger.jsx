@@ -49,8 +49,8 @@ const MenuBurger = () => {
           >
           {
             submenus 
-            ? <IconMenu2 size={25} /> 
-            : canGoBack && <IconArrowLeft size={25} />
+            ? <IconMenu2 size={20} />
+            : canGoBack && <IconArrowLeft size={20} />
           }
           </ActionIcon>
         </Menu.Target>
