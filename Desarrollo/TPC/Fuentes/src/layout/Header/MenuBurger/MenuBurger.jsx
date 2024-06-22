@@ -18,7 +18,7 @@ const MenuBurger = () => {
   const { currentRoute, setCurrentRoute } = useGUIData()
   const ref = useClickOutside(() => close())
 
-  const submenus = currentRoute.route.children
+  const submenus = currentRoute.route.options
   const goBack = () => setCurrentRoute(currentRoute.path.slice(0, -1))
   const canGoBack = currentRoute.path.length > 1
 
@@ -59,11 +59,16 @@ const MenuBurger = () => {
           Object.entries(submenus || []).map(([key, value]) => {
             // console.log(value)
             return (
-              <Menu.Item 
+              <Menu.Item
+                pr={20}
                 key={key}
                 leftSection={value.Icon && <value.Icon size={15} />}
                 onClick={() => {
                   close()
+                  if (value.action) {
+                    value.action()
+                    return
+                  }
                   setCurrentRoute([...currentRoute.path, key])
                 }}
               >

@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import modules from '../modules'
 
-const getRouteOf = (path) => path.reduce((obj, key) => obj.children[key], modules)
+const getRouteOf = (path) => path.reduce((obj, key) => obj.options[key], modules)
 
 const useGUIData = create((set) => ({
   currentRoute: {

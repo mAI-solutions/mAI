@@ -1,3 +1,2 @@
-import Noticias from './Noticias';
-
-export default Noticias;
+import Noticias from './Noticias'
+export default Noticias

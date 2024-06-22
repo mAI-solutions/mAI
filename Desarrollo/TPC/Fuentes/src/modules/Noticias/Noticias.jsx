@@ -2,7 +2,7 @@ import {
   Stack,
   ScrollArea
 } from '@mantine/core'
-import Post from './Post';
+import Post from './components/Post';
 import classes from './Noticias.module.css'
 
 const data = [

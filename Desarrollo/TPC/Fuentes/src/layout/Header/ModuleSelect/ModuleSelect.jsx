@@ -20,9 +20,9 @@ const ModuleSelect = ({ currentRoute, setCurrentRoute }) => {
   const [opened, setOpened] = useState(false)
   const [, setHovered] = useState(null)
 
-  const currentModuleProps = modules.children[currentRoute.path[0]]
+  const currentModuleProps = modules.options[currentRoute.path[0]]
 
-  const items = Object.entries(modules.children).map(([key, value]) => {
+  const items = Object.entries(modules.options).map(([key, value]) => {
     const moduleProps = value
     return (
       <Menu.Item

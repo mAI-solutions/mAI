@@ -11,6 +11,7 @@ import {
 } from '@tabler/icons-react'
 
 import useUser from '../../../store/useUser'
+import userService from '../../../services/user'
 
 import classes from './UserOptions.module.css'
 
@@ -28,7 +29,6 @@ const UserOptions = ({ size }) => {
 
   return (
     <Menu
-      width={200}
       offset={21}
       position="bottom-end"
       transitionProps={{ transition: 'fade' }}
@@ -39,7 +39,7 @@ const UserOptions = ({ size }) => {
       <Menu.Target>
         <UnstyledButton className={classes.user}>
           <Avatar
-            src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png"
+            src={userService.getAvatar()}
             size={size}
             radius="50%"
             mr={6}
@@ -47,12 +47,16 @@ const UserOptions = ({ size }) => {
         </UnstyledButton>
       </Menu.Target>
       <Menu.Dropdown>
-        <Menu.Item leftSection={<IconSettings {...iconProps} />}>
+        <Menu.Item
+          leftSection={<IconSettings {...iconProps} />}
+          pr={20}
+        >
           Ajustes
         </Menu.Item>
         <Menu.Item 
           leftSection={<IconLogout {...iconProps} />}
           onClick={logout}
+          pr={20}
         >
           Cerrar sesión
         </Menu.Item>

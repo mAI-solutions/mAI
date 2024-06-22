@@ -2,30 +2,25 @@ import {
   IconRss, 
   IconFeather,
   IconAlarm,
+  IconRefresh,
   IconEdit,
 } from '@tabler/icons-react'
 
 import Noticias from './Noticias'
-import Feeds from './Noticias/Feeds'
+import noticiasOptions from './Noticias/options'
 
 import Acciones from './Acciones'
 
 import Redaccion from './Redaccion'
 
 export default {
-  children: {
+  options: {
     'noticias': {
       label: 'Feeds de noticias',
       desc: 'Las últimas novedades de tus sitios favoritos',
       Icon: IconRss,
       component: Noticias,
-      children: {
-        'feeds': {
-          label: 'Gestionar feeds',
-          Icon: IconEdit,
-          component: Feeds,
-        }
-      }
+      options: noticiasOptions
     },
     'redaccion': {
       label: 'Asistente de redacción',

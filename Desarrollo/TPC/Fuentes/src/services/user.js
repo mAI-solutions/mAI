@@ -16,12 +16,15 @@ const logout = () => {
   pb.authStore.clear()
 }
 
-const storedUser = () => {
-  return pb.authStore.model
+const storedUser = pb.authStore.model
+
+const getAvatar = () => {
+  return pb.files.getUrl(storedUser, storedUser.avatar)
 }
 
 export default {
+  storedUser,
   login,
   logout,
-  storedUser
+  getAvatar
 }

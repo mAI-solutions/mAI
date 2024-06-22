@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import userService from '../services/user'
 
 const useUser = create(set => ({
-  user: userService.storedUser(),
+  user: userService.storedUser,
   login: async ({ username, password }) => {
     const { user, error } = await userService.login(username, password)
     if (error) {
@@ -14,7 +14,7 @@ const useUser = create(set => ({
   logout: () => {
     userService.logout()
     set({ user: null })
-  }
+  },
 }))
 
 export default useUser
