@@ -1,7 +1,7 @@
 import Header from './layout/Header'
 import ContentWrapper from './layout/ContentWrapper'
 import Login from './layout/Login'
-import useUserData from './store/useUser'
+import useUser from './store/useUser'
 
 import {
   Stack,
@@ -9,7 +9,7 @@ import {
 } from '@mantine/core'
 
 const App = () => {
-  const { user } = useUserData()
+  const { user } = useUser()
 
   if (!user) {
     return (

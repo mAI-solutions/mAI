@@ -42,7 +42,7 @@ const UserOptions = ({ size }) => {
             src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png"
             size={size}
             radius="50%"
-            m={5}
+            mr={6}
           />
         </UnstyledButton>
       </Menu.Target>
