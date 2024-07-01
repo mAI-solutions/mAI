@@ -3,7 +3,7 @@ import modules from '../modules'
 
 const getRouteOf = (path) => path.reduce((obj, key) => obj.options[key], modules)
 
-const useGUIData = create((set) => ({
+const useGUI = create((set) => ({
   currentRoute: {
     path: ['noticias'],
     route: getRouteOf(['noticias']),
@@ -19,4 +19,4 @@ const useGUIData = create((set) => ({
   },
 }))
 
-export default useGUIData
+export default useGUI

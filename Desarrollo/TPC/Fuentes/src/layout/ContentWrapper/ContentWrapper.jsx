@@ -1,7 +1,7 @@
-import useGUIData from '../../store/useGUI'
+import useGUI from '../../store/useGUI'
 
 const ContentWrapper = () => {
-  const { currentRoute } = useGUIData()
+  const { currentRoute } = useGUI()
   const { component: Component } = currentRoute.route
   // console.log(currentRoute)
   return <Component />

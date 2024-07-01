@@ -11,12 +11,12 @@ import {
 import { useDisclosure } from '@mantine/hooks'
 import { useForm } from '@mantine/form'
 
-import useUser from '../../store/useUser'
+import useLogin from '../../store/useLogin'
 
 import logo from '../../assets/logo.svg'
 
 const Login = () => {
-  const { login } = useUser()
+  const { login } = useLogin()
   const [loading, { open, close }] = useDisclosure(false)
 
   const form = useForm({

@@ -11,11 +11,11 @@ import {
 import { useClickOutside } from '@mantine/hooks'
 
 import { useDisclosure } from '@mantine/hooks'
-import useGUIData from '../../../store/useGUI'
+import useGUI from '../../../store/useGUI'
 
 const MenuBurger = () => {
   const [opened, { close, toggle }] = useDisclosure(false)
-  const { currentRoute, setCurrentRoute } = useGUIData()
+  const { currentRoute, setCurrentRoute } = useGUI()
   const ref = useClickOutside(() => close())
 
   const submenus = currentRoute.route.options

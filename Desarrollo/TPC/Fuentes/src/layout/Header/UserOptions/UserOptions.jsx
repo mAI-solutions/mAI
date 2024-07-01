@@ -10,8 +10,8 @@ import {
   IconLogout,
 } from '@tabler/icons-react'
 
-import useUser from '../../../store/useUser'
-import userService from '../../../services/user'
+import useLogin from '../../../store/useLogin'
+import { getAvatar } from '../../../services/authUser'
 
 import classes from './UserOptions.module.css'
 
@@ -24,7 +24,7 @@ const iconProps = {
 }
 
 const UserOptions = ({ size }) => {
-  const { logout } = useUser()
+  const { logout } = useLogin()
   const [, setUserMenuOpened] = useState(false);
 
   return (
@@ -37,9 +37,9 @@ const UserOptions = ({ size }) => {
       withinPortal
     >
       <Menu.Target>
-        <UnstyledButton className={classes.user}>
+        <UnstyledButton className={classes.authUser}>
           <Avatar
-            src={userService.getAvatar()}
+            src={getAvatar()}
             size={size}
             radius="50%"
             mr={6}

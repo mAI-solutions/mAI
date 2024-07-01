@@ -2,12 +2,10 @@ import pb from '../../../services/pb'
 import axios from 'axios'
 
 const fetchFeeds = async () => {
-  const { feeds } = pb.authStore.model.feeds
+  const { urls } = pb.authStore.model.noticiasData
   const returnedFeeds = []
-  for (const url of feeds) {
-    const { data } = await axios.get(pb.baseUrl + '/proxy', {
-      params: { url }
-    })
+  for (const url of urls) {
+    const { data } = await axios.post(pb.baseUrl + '/proxy', { url })
     returnedFeeds.push(data)
   }
   return returnedFeeds
