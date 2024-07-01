@@ -1,3 +1,2 @@
-import AccionEditor from './AccionEditor';
-
-export default AccionEditor;
+import AccionEditor from './AccionEditor'
+export default AccionEditor

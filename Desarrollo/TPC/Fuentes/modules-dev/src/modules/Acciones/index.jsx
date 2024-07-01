@@ -1,3 +1,2 @@
-import Acciones from './Acciones';
-
-export default Acciones;
+import Acciones from './Acciones'
+export default Acciones
