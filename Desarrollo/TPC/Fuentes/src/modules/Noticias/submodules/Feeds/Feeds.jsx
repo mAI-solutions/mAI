@@ -4,6 +4,8 @@ import {
   ActionIcon,
   Stack,
   ScrollArea,
+  Center,
+  Text,
   Affix,
 } from '@mantine/core'
 
@@ -22,35 +24,49 @@ import { getAuthUser, updateAuthUser } from '../../../../services/authUser'
 
 const Feeds = () => {
   const [feeds, setFeeds] = useState(getAuthUser().noticiasData.urls)
-  const [ modalOpened, modalHandlers ] = useDisclosure(false)
+  const [ modalOpened, modalHandlers ] = useDisclosure()
+
+  console.log(feeds)
 
   return (
     <>
-      <ScrollArea>
-        <Stack m={20}>
-          {feeds.map((url) => (
-            <FeedCard 
-              key={url}
-              url={url}
-              onDelete={async () => {
-                const newFeeds = feeds.filter((_url) => _url !== url)
-                await updateAuthUser({ noticiasData: { urls: newFeeds } })
-                setFeeds(newFeeds)
-              }}
-              onEdit={async (new_url) => {
-                const newFeeds = feeds.map((_url) => {
-                  if (_url === url) {
-                    return new_url
-                  }
-                  return _url
-                })
-                await updateAuthUser({ noticiasData: { urls: newFeeds } })
-                setFeeds(newFeeds) 
-              }}
-            />
-          ))}
-        </Stack>   
-      </ScrollArea>
+      {
+        feeds.length
+        ? (
+          <ScrollArea>
+            <Stack m={20}>
+              {feeds.map((url) => (
+                <FeedCard 
+                  key={url}
+                  url={url}
+                  onDelete={async () => {
+                    const newFeeds = feeds.filter((_url) => _url !== url)
+                    await updateAuthUser({ noticiasData: { urls: newFeeds } })
+                    setFeeds(newFeeds)
+                  }}
+                  onEdit={async (new_url) => {
+                    const newFeeds = feeds.map((_url) => {
+                      if (_url === url) {
+                        return new_url
+                      }
+                      return _url
+                    })
+                    await updateAuthUser({ noticiasData: { urls: newFeeds } })
+                    setFeeds(newFeeds) 
+                  }}
+                />
+              ))}
+            </Stack>   
+          </ScrollArea>
+        )
+        : (
+          <Center h='100%'>
+            <Text size='xs' c='dimmed' >
+              Aún no has añadido feeds
+            </Text>
+          </Center>
+        )
+      }
       <Affix position={{ bottom: 20, right: 20 }}>
         <ActionIcon
           color='default'

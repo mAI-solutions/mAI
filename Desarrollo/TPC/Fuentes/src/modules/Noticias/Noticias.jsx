@@ -3,15 +3,18 @@ import {
   Center,
   ScrollArea,
   Text,
-  Loader
+  Loader,
+  Anchor,
 } from '@mantine/core'
 
 import Post from './components/Post';
 
 import useRSS from '../../store/useRSS';
+import useRoute from '../../store/useRoute';
 
 const Noticias = () => {
   const { posts, isFetching } = useRSS()
+  const { setCurrentRoute } = useRoute()
 
   if (isFetching) {
     return (
@@ -29,7 +32,10 @@ const Noticias = () => {
     return (
       <Center h='100%'>
         <Text size='xs' c='dimmed' >
-          No hay noticias
+          No hay noticias para mostrar.{' '}
+          <Anchor onClick={() => setCurrentRoute(['noticias', 'feeds'])}>
+            Gestionar feeds
+          </Anchor>
         </Text>
       </Center>
     )

@@ -32,8 +32,6 @@ const Post = (props) => {
   const image = content.querySelector('img')?.src
   const desc = content.querySelector('p')?.textContent
 
-  console.log({ image, desc })
-
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Stack gap={15}>
@@ -56,7 +54,6 @@ const Post = (props) => {
             <Text
               size='xs'
               c='dimmed'
-              w={300}
             >
               {desc}
             </Text>
