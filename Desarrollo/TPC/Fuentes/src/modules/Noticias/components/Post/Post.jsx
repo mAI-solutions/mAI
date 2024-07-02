@@ -9,7 +9,6 @@ import {
   Stack,
   // Badge,
   Avatar,
-  useMantineTheme,
   rem,
 } from '@mantine/core';
 import classes from './Post.module.css';
@@ -20,7 +19,6 @@ const Post = (props) => {
     target: '_blank', 
     rel: 'noopener noreferrer' 
   };
-  const theme = useMantineTheme();
 
   return (
     <Card withBorder radius="md" className={classes.card}>
@@ -49,10 +47,10 @@ const Post = (props) => {
 
       <Group 
         justify="space-between" 
-        className={classes.footer}
+        mt='xs'
         preventGrowOverflow
       >
-        <Center w='70%'>
+        <Center maw='70%'>
           <Avatar
             src="https://images.unsplash.com/photo-1622830032659-6d7f4e7a1f4e"
             size={24}
@@ -60,7 +58,7 @@ const Post = (props) => {
             mr="xs"
           />
           <Text 
-            fz="sm"
+            size='sm'
             truncate='end' 
             inline
           >
@@ -76,13 +74,15 @@ const Post = (props) => {
           >
             <IconExternalLink
               style={{ width: rem(16), height: rem(16) }}
-              color={theme.colors.yellow[7]}
+              color={'var(--mantine-color-yellow-6)'} 
             />
           </ActionIcon>
-          <ActionIcon className={classes.action}>
+          <ActionIcon 
+            className={classes.action}
+          >
             <IconLink 
               style={{ width: rem(16), height: rem(16) }} 
-              color={theme.colors.blue[6]} 
+              color={'var(--mantine-color-blue-4)'} 
             />
           </ActionIcon>
         </Group>
