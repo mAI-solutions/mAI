@@ -1,7 +1,9 @@
 import Header from './layout/Header'
 import ContentWrapper from './layout/ContentWrapper'
 import Login from './layout/Login'
-import useUser from './store/useUser'
+
+import useLogin from './store/useLogin'
+import useAppStart from './hooks/useAppStart'
 
 import {
   Stack,
@@ -9,9 +11,10 @@ import {
 } from '@mantine/core'
 
 const App = () => {
-  const { user } = useUser()
+  const { loggedIn } = useLogin()
+  useAppStart({ loggedIn })
 
-  if (!user) {
+  if (!loggedIn) {
     return (
       <Center h={600}>
         <Login />

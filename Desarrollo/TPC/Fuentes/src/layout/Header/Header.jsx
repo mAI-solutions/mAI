@@ -2,7 +2,7 @@ import MenuBurger from './MenuBurger'
 import ModuleSelect from "./ModuleSelect"
 import UserOptions from "./UserOptions"
 
-import useGUIData from '../../store/useGUI'
+import useGUI from '../../store/useRoute'
 
 import {
   Group,
@@ -12,7 +12,7 @@ import {
 import classes from './Header.module.css'
 
 const Header = () => {
-  const { currentRoute, setCurrentRoute } = useGUIData()
+  const { currentRoute, setCurrentRoute } = useGUI()
 
   return (
     <Group justify='space-between' px={20} py={8} className={classes.header}>

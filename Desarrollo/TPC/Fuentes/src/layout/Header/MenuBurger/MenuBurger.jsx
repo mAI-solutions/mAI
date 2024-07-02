@@ -11,14 +11,14 @@ import {
 import { useClickOutside } from '@mantine/hooks'
 
 import { useDisclosure } from '@mantine/hooks'
-import useGUIData from '../../../store/useGUI'
+import useGUI from '../../../store/useRoute'
 
 const MenuBurger = () => {
   const [opened, { close, toggle }] = useDisclosure(false)
-  const { currentRoute, setCurrentRoute } = useGUIData()
+  const { currentRoute, setCurrentRoute } = useGUI()
   const ref = useClickOutside(() => close())
 
-  const submenus = currentRoute.route.children
+  const submenus = currentRoute.route.options
   const goBack = () => setCurrentRoute(currentRoute.path.slice(0, -1))
   const canGoBack = currentRoute.path.length > 1
 
@@ -59,11 +59,16 @@ const MenuBurger = () => {
           Object.entries(submenus || []).map(([key, value]) => {
             // console.log(value)
             return (
-              <Menu.Item 
+              <Menu.Item
+                pr={20}
                 key={key}
                 leftSection={value.Icon && <value.Icon size={15} />}
                 onClick={() => {
                   close()
+                  if (value.action) {
+                    value.action()
+                    return
+                  }
                   setCurrentRoute([...currentRoute.path, key])
                 }}
               >
