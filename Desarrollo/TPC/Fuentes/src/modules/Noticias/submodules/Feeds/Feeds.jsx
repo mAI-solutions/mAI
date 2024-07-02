@@ -27,10 +27,7 @@ const Feeds = () => {
   return (
     <>
       <ScrollArea>
-        <Stack
-          py={20}
-          px={20}
-        >
+        <Stack m={20}>
           {feeds.map((url) => (
             <FeedCard 
               key={url}

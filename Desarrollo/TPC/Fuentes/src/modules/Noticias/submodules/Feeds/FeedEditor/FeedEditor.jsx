@@ -11,6 +11,8 @@ import {
   matches
 } from '@mantine/form'
 
+import useRSS from '../../../../../store/useRSS'
+
 const FeedEditor = ({
   opened,
   onClose,
@@ -18,11 +20,12 @@ const FeedEditor = ({
   url = '',
   sendLabel
 }) => {
-  // const [newUrl, setNewUrl] = useState(url)
   const form = useForm({
     initialValues: { newUrl: url },
     validate: { newUrl: matches(/[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/, 'URL inválida') }
   })
+
+  const { fetchPosts } = useRSS()
 
   return (
     <Modal
@@ -33,6 +36,7 @@ const FeedEditor = ({
     >
       <form onSubmit={form.onSubmit(async ({ newUrl }) => {
         await onSend(newUrl)
+        await fetchPosts()
       })}>
         <Stack>
           <TextInput 

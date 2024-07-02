@@ -1,5 +1,5 @@
 import Feeds from './submodules/Feeds'
-import rss from '../../services/rss'
+import useRSS from '../../store/useRSS'
 
 import { 
   IconRefresh,
@@ -11,8 +11,7 @@ export default {
     label: 'Actualizar',
     Icon: IconRefresh,
     action: async () => {
-      const feeds = await rss.fetchFeeds()
-      console.log(feeds)
+      await useRSS.getState().fetchPosts()
     },
   },
   'feeds': {

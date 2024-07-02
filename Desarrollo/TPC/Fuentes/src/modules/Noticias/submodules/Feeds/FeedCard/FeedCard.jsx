@@ -1,6 +1,7 @@
 import {
   ActionIcon,
   Group,
+  Box,
   Card,
   Text,
   Menu,
@@ -27,13 +28,15 @@ const FeedCard = ({ url, onEdit, onDelete }) => {
   return (
     <>
       <Card>
-        <Group justify='space-between'>
-          <div>
-            <Text>
+        <Group 
+          justify='space-between' 
+        >
+          <Box>
+            <Text w={250} truncate='end'>
               {url}
             </Text>
             <Text 
-              size="xs" 
+              size="xs"
               c="dimmed" 
               onClick={() => window.open(url, '_blank')}
               style={{ cursor: 'pointer' }}
@@ -41,7 +44,7 @@ const FeedCard = ({ url, onEdit, onDelete }) => {
             >
               {url}
             </Text>
-          </div>
+          </Box>
           <Menu position='bottom-end'>
             <Menu.Target>
               <ActionIcon
