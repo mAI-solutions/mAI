@@ -64,13 +64,24 @@ const Post = (props) => {
             radius="xl"
             mr="xs"
           />
-          <Text 
-            size='sm'
-            truncate='end' 
-            inline
-          >
-            {props.Source}
-          </Text>
+          <Stack gap={0}>
+            <Text 
+              size='sm'
+              truncate='end' 
+            >
+              {props.author?.name || props.Source}
+            </Text>
+            {
+              props.author?.name &&
+              <Text 
+                size='xs'
+                c='dimmed'
+                truncate='end' 
+              >
+                {props.Source}
+              </Text>
+            }
+          </Stack>
         </Center>
 
         <Group gap={8} mr={0}>
