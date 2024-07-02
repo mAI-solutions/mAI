@@ -1,4 +1,9 @@
-import { IconExternalLink, IconLink } from '@tabler/icons-react';
+import { 
+  IconExternalLink, 
+  IconLink,
+  IconCheck
+} from '@tabler/icons-react';
+
 import {
   Card,
   // Image,
@@ -9,6 +14,8 @@ import {
   Stack,
   // Badge,
   Avatar,
+  Tooltip,
+  CopyButton,
   rem,
 } from '@mantine/core';
 import classes from './Post.module.css';
@@ -77,14 +84,37 @@ const Post = (props) => {
               color={'var(--mantine-color-yellow-6)'} 
             />
           </ActionIcon>
-          <ActionIcon 
-            className={classes.action}
+          <CopyButton 
+            value={props.link}
+            timeout={1500}
           >
-            <IconLink 
-              style={{ width: rem(16), height: rem(16) }} 
-              color={'var(--mantine-color-blue-4)'} 
-            />
-          </ActionIcon>
+          {({ copied, copy }) => (
+            <Tooltip 
+              label={copied ? 'Copiado' : 'Copiar'} 
+              withArrow 
+              position="bottom"
+            >
+              <ActionIcon 
+                className={classes.action}
+                color={copied ? 'teal' : 'gray'} 
+                variant="subtle" 
+                onClick={copy}
+              >
+                {copied ? (
+                  <IconCheck 
+                    style={{ width: rem(16), height: rem(16) }} 
+                    color={'var(--mantine-color-teal-6)'} 
+                  />
+                ) : (
+                  <IconLink
+                    style={{ width: rem(16), height: rem(16) }}
+                    color={'var(--mantine-color-blue-4)'} 
+                  />
+                )}
+              </ActionIcon>
+            </Tooltip>
+          )}
+          </CopyButton>
         </Group>
       </Group>
     </Card>
