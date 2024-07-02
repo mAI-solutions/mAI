@@ -1,4 +1,4 @@
-import useGUI from '../../store/useGUI'
+import useGUI from '../../store/useRoute'
 
 const ContentWrapper = () => {
   const { currentRoute } = useGUI()

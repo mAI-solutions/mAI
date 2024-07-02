@@ -18,7 +18,7 @@ import {
 
 import FeedEditor from '../FeedEditor'
 
-const FeedCard = ({ feed, onEdit, onDelete }) => {
+const FeedCard = ({ url, onEdit, onDelete }) => {
   const [
     modalOpened, 
     { open: modalOpen, close: modalClose }
@@ -26,20 +26,20 @@ const FeedCard = ({ feed, onEdit, onDelete }) => {
   
   return (
     <>
-      <Card key={feed.url}>
+      <Card>
         <Group justify='space-between'>
           <div>
             <Text>
-              {feed.siteName}
+              {url}
             </Text>
             <Text 
               size="xs" 
               c="dimmed" 
-              onClick={() => window.open(feed.url, '_blank')}
+              onClick={() => window.open(url, '_blank')}
               style={{ cursor: 'pointer' }}
               title='Ir al sitio'
             >
-              {feed.url}
+              {url}
             </Text>
           </div>
           <Menu position='bottom-end'>
@@ -73,9 +73,9 @@ const FeedCard = ({ feed, onEdit, onDelete }) => {
       <FeedEditor
         opened={modalOpened}
         onClose={modalClose}
-        url={feed.url}
+        url={url}
         onSend={(url) => {
-          onEdit({...feed, url})
+          onEdit(url)
           modalClose()
         }}
         sendLabel='Actualizar'

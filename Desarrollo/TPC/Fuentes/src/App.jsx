@@ -1,7 +1,9 @@
 import Header from './layout/Header'
 import ContentWrapper from './layout/ContentWrapper'
 import Login from './layout/Login'
+
 import useLogin from './store/useLogin'
+import useAppStart from './hooks/useAppStart'
 
 import {
   Stack,
@@ -9,7 +11,8 @@ import {
 } from '@mantine/core'
 
 const App = () => {
-  const { loggedIn, autoRefresh } = useLogin()
+  const { loggedIn } = useLogin()
+  useAppStart({ loggedIn })
 
   if (!loggedIn) {
     return (
@@ -18,8 +21,6 @@ const App = () => {
       </Center>
     )
   }
-
-  autoRefresh()
 
   return (
     <Stack gap={0} h={600}>

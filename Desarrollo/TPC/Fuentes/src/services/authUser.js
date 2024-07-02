@@ -1,7 +1,5 @@
 import pb from './pb'
 
-const authUser = pb.authStore.model
-
 export const authWithPassword = async (username, password) => {
   const response = { loggedInUser: null }
   try {
@@ -18,21 +16,21 @@ export const clearAuth = () => {
   pb.authStore.clear()
 }
 
-export const autoRefresh = (logout) => {
-  pb.collection('users').subscribe(authUser.id, (e) => {
-    if (e.action == "delete") {
-      pb.authStore.clear();
-      logout()
-    } else {
-      pb.authStore.save(pb.authStore.token, e.record);
-    }
-  })
-}
-
-export const getAuthUser = () => authUser
+export const getAuthUser = () => pb.authStore.model
 
 export const getAvatar = () => {
-  return pb.files.getUrl(authUser, authUser.avatar)
+  return pb.files.getUrl(getAuthUser(), getAuthUser().avatar)
 }
 
-export default authUser
+export const updateAuthUser = async (data) => {
+  const response = { updatedUser: null }
+  try {
+    const updatedUser = await pb.collection('users').update(getAuthUser().id, data)
+    response.updatedUser = updatedUser
+    pb.authStore.save(pb.authStore.token, updatedUser)
+  }
+  catch (error) {
+    response.error = error
+  }
+  return response
+}

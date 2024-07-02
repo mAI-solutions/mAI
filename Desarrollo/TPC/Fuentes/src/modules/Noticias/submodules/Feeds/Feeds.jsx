@@ -1,26 +1,3 @@
-const data = [
-  {
-    siteName: "Financial Times",
-    url: "https://www.ft.com/",
-  },
-  {
-    siteName: "Health News Daily",
-    url: "https://healthnewsdaily.com"
-  },
-  {
-    siteName: "Travel Weekly",
-    url: "https://www.travelweekly.com/"
-  },
-  {
-    siteName: "Green Tech Journal",
-    url: "https://www.greentechjournal.com/"
-  },
-  {
-    siteName: "Sports Insider",
-    url: "https://www.sportsinsider.com/"
-  }
-]
-
 import { useState } from 'react'
 
 import {
@@ -41,12 +18,11 @@ import {
 import FeedEditor from './FeedEditor'
 import FeedCard from './FeedCard'
 
+import { getAuthUser, updateAuthUser } from '../../../../services/authUser'
+
 const Feeds = () => {
-  const [feeds, setFeeds] = useState(data)
-  const [
-    modalOpened, 
-    { open: modalOpen, close: modalClose }
-  ] = useDisclosure(false)
+  const [feeds, setFeeds] = useState(getAuthUser().noticiasData.urls)
+  const [ modalOpened, modalHandlers ] = useDisclosure(false)
 
   return (
     <>
@@ -55,21 +31,23 @@ const Feeds = () => {
           py={20}
           px={20}
         >
-          {feeds.map((feed) => (
+          {feeds.map((url) => (
             <FeedCard 
-              key={feed.url}
-              feed={feed}
-              onDelete={() => {
-                const newFeeds = feeds.filter((f) => f.url !== feed.url)
+              key={url}
+              url={url}
+              onDelete={async () => {
+                const newFeeds = feeds.filter((_url) => _url !== url)
+                await updateAuthUser({ noticiasData: { urls: newFeeds } })
                 setFeeds(newFeeds)
               }}
-              onEdit={(newFeed) => {
-                const newFeeds = feeds.map((f) => {
-                  if (f.url === feed.url) {
-                    return newFeed
+              onEdit={async (new_url) => {
+                const newFeeds = feeds.map((_url) => {
+                  if (_url === url) {
+                    return new_url
                   }
-                  return f
+                  return _url
                 })
+                await updateAuthUser({ noticiasData: { urls: newFeeds } })
                 setFeeds(newFeeds) 
               }}
             />
@@ -82,18 +60,20 @@ const Feeds = () => {
           variant='default'
           title='Añadir feed'
           aria-label="Añadir feed"
-          onClick={modalOpen}
+          onClick={modalHandlers.open}
         >
           <IconPlus size={15}/>
         </ActionIcon>
       </Affix>
       <FeedEditor
         opened={modalOpened}
-        onClose={modalClose}
+        onClose={modalHandlers.close}
         sendLabel='Añadir'
-        onSend={(url) => {
-          setFeeds([ { siteName: 'New Feed', url }, ...feeds])
-          modalClose()
+        onSend={async (url) => {
+          const newFeeds = [ url, ...feeds ]
+          await updateAuthUser({ noticiasData: { urls: newFeeds } })
+          setFeeds(newFeeds)
+          modalHandlers.close()
         }}
       />
     </>

@@ -2,7 +2,7 @@ import MenuBurger from './MenuBurger'
 import ModuleSelect from "./ModuleSelect"
 import UserOptions from "./UserOptions"
 
-import useGUI from '../../store/useGUI'
+import useGUI from '../../store/useRoute'
 
 import {
   Group,

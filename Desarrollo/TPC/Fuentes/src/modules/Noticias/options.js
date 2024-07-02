@@ -1,5 +1,5 @@
 import Feeds from './submodules/Feeds'
-import rss from './services/rss'
+import rss from '../../services/rss'
 
 import { 
   IconRefresh,
