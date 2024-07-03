@@ -29,8 +29,10 @@ const Post = (props) => {
 
   const hostname = new URL(props.link).hostname
   const content = new DOMParser().parseFromString(props.content, 'text/html')
-  const image = content.querySelector('img')?.src
   const desc = content.querySelector('p')?.textContent
+  
+  const imageSrc = content.querySelector('img')?.src
+  const thumbSrc = props.extensions?.media?.group?.[0].children?.thumbnail?.[0].attrs.url
 
   return (
     <Card withBorder radius="md" className={classes.card}>
@@ -61,11 +63,11 @@ const Post = (props) => {
         </Stack>
 
         {
-          image &&
+          (imageSrc || thumbSrc) &&
           <Card.Section>
             <a {...linkProps}>
               <Image 
-                src={image} 
+                src={imageSrc || thumbSrc} 
               />
             </a>
           </Card.Section>
@@ -85,7 +87,6 @@ const Post = (props) => {
             <Stack gap={0}>
               <Text 
                 size='sm'
-                truncate='end' 
               >
                 {props.author?.name || props.Source}
               </Text>
@@ -94,7 +95,6 @@ const Post = (props) => {
                 <Text 
                   size='xs'
                   c='dimmed'
-                  truncate='end' 
                 >
                   {props.Source}
                 </Text>
