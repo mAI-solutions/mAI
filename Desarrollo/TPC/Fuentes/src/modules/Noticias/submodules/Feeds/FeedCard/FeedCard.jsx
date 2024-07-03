@@ -1,6 +1,7 @@
 import {
   ActionIcon,
   Group,
+  Box,
   Card,
   Text,
   Menu,
@@ -16,9 +17,9 @@ import {
   IconDots
 } from '@tabler/icons-react'
 
-import AccionEditor from '../AccionEditor'
+import FeedEditor from '../FeedEditor'
 
-const AccionCard = ({ accion, onEdit, onDelete }) => {
+const FeedCard = ({ url, onEdit, onDelete }) => {
   const [
     modalOpened, 
     { open: modalOpen, close: modalClose }
@@ -27,18 +28,23 @@ const AccionCard = ({ accion, onEdit, onDelete }) => {
   return (
     <>
       <Card>
-        <Group justify='space-between'>
-          <div>
-            <Text>
-              {accion.title}
+        <Group 
+          justify='space-between' 
+        >
+          <Box>
+            <Text w={250} truncate='end'>
+              {url}
             </Text>
             <Text 
-              size="xs" 
+              size="xs"
               c="dimmed" 
+              onClick={() => window.open(url, '_blank')}
+              style={{ cursor: 'pointer' }}
+              title='Ir al sitio'
             >
-              Cada {accion.interval.frequency} {accion.interval.unit} 
+              {url}
             </Text>
-          </div>
+          </Box>
           <Menu position='bottom-end'>
             <Menu.Target>
               <ActionIcon
@@ -67,12 +73,12 @@ const AccionCard = ({ accion, onEdit, onDelete }) => {
           </Menu>
         </Group>
       </Card>
-      <AccionEditor
+      <FeedEditor
         opened={modalOpened}
         onClose={modalClose}
-        accion={accion}
-        onSend={(newAccion) => {
-          onEdit(newAccion)
+        url={url}
+        onSend={(url) => {
+          onEdit(url)
           modalClose()
         }}
         sendLabel='Actualizar'
@@ -81,4 +87,4 @@ const AccionCard = ({ accion, onEdit, onDelete }) => {
   )
 }
 
-export default AccionCard
+export default FeedCard
