@@ -1,5 +1,3 @@
-import { getAuthUser } from "../services/authUser";
-
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "silly-corrector",
