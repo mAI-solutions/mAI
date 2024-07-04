@@ -38,13 +38,13 @@ const Acciones = () => {
   const handleAddTask = (newAction) => {
     const updatedActions = [
       {
-        id: Math.random() * 1000000,
+        id: acciones.length,
         ...newAction,
       },
       ...acciones,
     ];
     updateUserTask(updatedActions).then(() => {
-      refetch(); // Refetch tasks after updating
+      refetch();
       modalClose();
     });
   };
@@ -53,7 +53,7 @@ const Acciones = () => {
     const newAcciones = acciones.filter(({ id }) => id !== taskId);
     setAcciones(newAcciones);
     updateUserTask(newAcciones).then(() => {
-      refetch(); // Refetch tasks after deleting
+      refetch();
     });
   };
 
@@ -63,7 +63,7 @@ const Acciones = () => {
     );
     setAcciones(newAcciones);
     updateUserTask(newAcciones).then(() => {
-      refetch(); // Refetch tasks after editing
+      refetch();
     });
   };
 
