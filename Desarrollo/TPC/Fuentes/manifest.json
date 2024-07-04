@@ -12,16 +12,14 @@
     "contextMenus",
     "activeTab",
     "scripting",
-    "storage"
+    "storage",
+    "background",
+    "notifications"
   ],
   "content_scripts": [
     {
-      "matches": [
-        "https://mail.google.com/*"
-      ],
-      "js": [
-        "./src/scripts/content.js"
-      ]
+      "matches": ["https://mail.google.com/*"],
+      "js": ["./src/scripts/content.js"]
     }
   ],
   "icons": {
@@ -32,12 +30,8 @@
   },
   "web_accessible_resources": [
     {
-      "matches": [
-        "https://mail.google.com/*"
-      ],
-      "resources": [
-        "content.js"
-      ]
+      "matches": ["https://mail.google.com/*"],
+      "resources": ["content.js"]
     }
   ]
 }
