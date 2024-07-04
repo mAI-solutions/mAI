@@ -4,7 +4,6 @@ import { Select, MantineProvider, Box, Button, Text, Loader, Center } from '@man
 import '@mantine/core/styles.css';
 import OpenAI from 'openai';
 import { removePrefix } from '../../utils/strings';
-import logo from '../../assets/logo.svg';
 
 const openai = new OpenAI({
   apiKey: 'sk-proj-C0LE9EDBMlDaD4UQy8NET3BlbkFJiYhHXsxMj5AD9PUmm9Qs',
