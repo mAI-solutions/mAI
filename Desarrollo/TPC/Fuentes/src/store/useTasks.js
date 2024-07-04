@@ -10,6 +10,11 @@ const useTasks = create((set) => ({
     const tasks = await getTasks();
     set({ tasks, isFetching: false });
   },
+  refetch: async () => {
+    set({ isFetching: true });
+    const tasks = await getTasks();
+    set({ tasks, isFetching: false });
+  },
 }));
 
 export default useTasks;
