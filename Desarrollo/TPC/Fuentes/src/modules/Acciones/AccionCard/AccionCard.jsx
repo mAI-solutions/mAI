@@ -12,9 +12,14 @@ const AccionCard = ({ accion, onEdit, onDelete }) => {
   return (
     <>
       <Card>
-        <Group justify="space-between">
-          <div>
-            <Text>{accion.title}</Text>
+        <Group position="apart" align="center" style={{ width: "100%" }}>
+          <div style={{ flex: 1 }}>
+            <Text sise="md" fw={700}>
+              {accion.title}
+            </Text>
+            <Text size="sm" fw={500}>
+              {accion.action.properties.message}
+            </Text>
             <Text size="xs" c="dimmed">
               Cada {accion.interval.minutes} Minutos, {accion.interval.hours}{" "}
               Horas, {accion.interval.days} Días
@@ -27,8 +32,9 @@ const AccionCard = ({ accion, onEdit, onDelete }) => {
                 title="Opciones"
                 variant="transparent"
                 color="default"
+                style={{ width: 2 }}
               >
-                <IconDots size={15} />
+                <IconDots size={20} />
               </ActionIcon>
             </Menu.Target>
             <Menu.Dropdown>
