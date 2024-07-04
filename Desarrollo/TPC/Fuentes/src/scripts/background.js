@@ -1,7 +1,7 @@
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "silly-corrector",
-    title: "Silly Corrector",
+    title: "Corrector contextual",
     contexts: ["selection"],
   });
 });
