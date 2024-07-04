@@ -34,7 +34,7 @@ export default ToneModal;
 
   echo -e "$component_content" > $file_path
   git add $file_path
-  git commit -m "feat: Add ToneModal component version $index with 10000 dummy lines"
+  git commit -m "Fix: fixing ToneModal component"
 }
 
 # Hacer 10 commits
