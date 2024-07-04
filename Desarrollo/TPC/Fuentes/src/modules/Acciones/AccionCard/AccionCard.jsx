@@ -15,7 +15,7 @@ import AccionEditor from "../AccionEditor";
 import {
   scheduleNotification,
   stopNotification,
-} from "../../../scripts/helpers";
+} from "../../../scripts/background";
 
 const AccionCard = ({ accion, onEdit, onDelete }) => {
   const [modalOpened, { open: modalOpen, close: modalClose }] = useDisclosure();
