@@ -105,7 +105,7 @@ const AccionEditor = ({ accion, opened, onClose, onSend, sendLabel }) => {
                 ...newAccion.action,
                 properties: {
                   ...newAccion.action.properties,
-                  message: value,
+                  message: value.target.value,
                 },
               },
             });
