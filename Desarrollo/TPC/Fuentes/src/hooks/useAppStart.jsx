@@ -1,18 +1,21 @@
-import { useEffect } from "react"
+import { useEffect } from "react";
 
-import useRSS from "../store/useRSS"
+import useRSS from "../store/useRSS";
+import useTasks from "../store/useTasks";
 
 const useAppStart = ({ loggedIn }) => {
-  const { fetchPosts } = useRSS()
-  
+  const { fetchPosts } = useRSS();
+  const { fetchTasks } = useTasks();
+
   useEffect(() => {
     const onAppStart = async () => {
-      fetchPosts()
-    }
+      fetchPosts();
+      fetchTasks();
+    };
     if (loggedIn) {
-      onAppStart()
+      onAppStart();
     }
-  }, [loggedIn])
-}
+  }, [loggedIn]);
+};
 
-export default useAppStart
+export default useAppStart;

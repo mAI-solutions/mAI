@@ -1,21 +1,3 @@
-const data = [
-  {
-    id: 0,
-    title: "Concentración",
-    interval: {
-      minutes: 30,
-      hours: 0,
-      days: 0,
-    },
-    action: {
-      type: "notification",
-      properties: {
-        message: "¡Concéntrate!",
-      },
-    },
-  },
-];
-
 import { useState } from "react";
 
 import { ActionIcon, Stack, ScrollArea, Affix } from "@mantine/core";
@@ -26,20 +8,36 @@ import { IconPlus } from "@tabler/icons-react";
 
 import AccionEditor from "./AccionEditor";
 import AccionCard from "./AccionCard";
+import useTasks from "../../store/useTasks";
 
 const Acciones = () => {
-  const [acciones, setAcciones] = useState(data);
   const [modalOpened, { open: modalOpen, close: modalClose }] =
     useDisclosure(false);
+
+  const { tasks, isFetching } = useTasks();
+
+  if (isFetching) {
+    return (
+      <Center h="100%">
+        <Loader />
+      </Center>
+    );
+  }
+
+  if (!tasks) {
+    return;
+  }
+
+  const [acciones, setAcciones] = useState(tasks);
 
   return (
     <>
       <ScrollArea>
         <Stack py={20} px={20}>
-          {acciones.map((accion) => (
+          {tasks.map((task) => (
             <AccionCard
-              key={accion.id}
-              accion={accion}
+              key={task.id}
+              accion={task}
               onDelete={() => {
                 const newAcciones = acciones.filter(
                   ({ id }) => id !== accion.id,
@@ -48,7 +46,7 @@ const Acciones = () => {
               }}
               onEdit={(newAccion) => {
                 const newAcciones = acciones.map((a) => {
-                  if (a.id === accion.id) {
+                  if (a.id === task.id) {
                     return newAccion;
                   }
                   return a;
