@@ -16,7 +16,8 @@ const AccionCard = ({ accion, onEdit, onDelete }) => {
           <div>
             <Text>{accion.title}</Text>
             <Text size="xs" c="dimmed">
-              Cada {accion.interval.minutes}
+              Cada {accion.interval.minutes} Minutos, {accion.interval.hours}{" "}
+              Horas, {accion.interval.days} Días
             </Text>
           </div>
           <Menu position="bottom-end">

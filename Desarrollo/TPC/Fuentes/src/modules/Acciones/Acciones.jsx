@@ -40,7 +40,7 @@ const Acciones = () => {
               accion={task}
               onDelete={() => {
                 const newAcciones = acciones.filter(
-                  ({ id }) => id !== accion.id,
+                  ({ id }) => id !== tasks.id,
                 );
                 setAcciones(newAcciones);
               }}
