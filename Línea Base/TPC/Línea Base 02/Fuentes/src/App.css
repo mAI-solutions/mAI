@@ -1,0 +1,35 @@
+body {
+  overflow-y: hidden;
+  padding: 0px;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */  
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.app {
+  width: 400px;
+  height: 600px;
+  padding: 0px 20px;
+}
+
+.content {
+  padding: 0px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.logo {
+  width: 40px;
+}
