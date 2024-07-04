@@ -1,10 +1,9 @@
-import { describe, expect, test, vi } from 'vitest';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import App from './App.jsx';
 import { MantineProvider } from '@mantine/core';
 
 // Mockeamos el componente App para que no intente hacer ninguna llamada a la API o a otras dependencias externas
-vi.mock('./App.jsx', () => ({
+jest.mock('./App.jsx', () => ({
   default: () => <div>App Component</div>,
 }));
 
