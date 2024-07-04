@@ -1,5 +1,5 @@
 import { ActionIcon, Group, Card, Text, Menu } from "@mantine/core";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useDisclosure } from "@mantine/hooks";
 
@@ -12,14 +12,50 @@ import {
 } from "@tabler/icons-react";
 
 import AccionEditor from "../AccionEditor";
-import {
-  scheduleNotification,
-  stopNotification,
-} from "../../../scripts/background";
 
 const AccionCard = ({ accion, onEdit, onDelete }) => {
   const [modalOpened, { open: modalOpen, close: modalClose }] = useDisclosure();
   const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    chrome.storage.local.get([`notification_active_${accion.id}`], (result) => {
+      if (result[`notification_active_${accion.id}`]) {
+        setActive(true);
+      }
+    });
+  }, [accion.id]);
+
+  const startNotification = (task) => {
+    chrome.runtime.sendMessage(
+      {
+        type: "scheduleNotification",
+        task: task,
+      },
+      (response) => {
+        if (response.status === "Notification scheduled") {
+          setActive(true);
+          chrome.storage.local.set({
+            [`notification_active_${task.id}`]: true,
+          });
+        }
+      },
+    );
+  };
+
+  const stopNotification = (taskId) => {
+    chrome.runtime.sendMessage(
+      {
+        type: "stopNotification",
+        taskId: taskId,
+      },
+      (response) => {
+        if (response.status === "Notification stopped") {
+          setActive(false);
+          chrome.storage.local.remove(`notification_active_${taskId}`);
+        }
+      },
+    );
+  };
 
   return (
     <>
@@ -50,7 +86,7 @@ const AccionCard = ({ accion, onEdit, onDelete }) => {
               <IconPlayerPlay
                 size={20}
                 onClick={() => {
-                  scheduleNotification(accion);
+                  startNotification(accion);
                   setActive(true);
                 }}
               />

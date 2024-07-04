@@ -1,10 +1,45 @@
-import { getAuthUser } from "../services/authUser";
+const intervalIds = {};
+
+function calculateIntervalInMilliseconds(interval) {
+  const { minutes, hours, days } = interval;
+  return (
+    minutes * 60 * 1000 + hours * 60 * 60 * 1000 + days * 24 * 60 * 60 * 1000
+  );
+}
+
+function scheduleNotification(task) {
+  const interval = calculateIntervalInMilliseconds(task.interval);
+
+  const intervalId = setInterval(() => {
+    chrome.notifications.create({
+      type: "basic",
+      iconUrl: chrome.runtime.getURL("img/portada.jpg"),
+      title: task.title,
+      message: task.action.properties.message,
+      priority: 2,
+    });
+  }, interval);
+
+  intervalIds[task.id] = intervalId;
+}
+
+function stopNotification(taskId) {
+  if (intervalIds[taskId]) {
+    clearInterval(intervalIds[taskId]);
+    delete intervalIds[taskId];
+  }
+}
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "silly-corrector",
     title: "Silly Corrector",
     contexts: ["selection"],
+  });
+  chrome.storage.local.get(["tasks"], (result) => {
+    if (result.tasks) {
+      result.tasks.forEach(scheduleNotification);
+    }
   });
 });
 
@@ -46,37 +81,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         modifiedText,
       });
     }
+  } else if (message.type === "scheduleNotification") {
+    scheduleNotification(message.task);
+    sendResponse({ status: "Notification scheduled" });
+  } else if (message.type === "stopNotification") {
+    stopNotification(message.taskId);
+    sendResponse({ status: "Notification stopped" });
   }
 });
-
-const intervalIds = {};
-
-function calculateIntervalInMilliseconds(interval) {
-  const { minutes, hours, days } = interval;
-  return (
-    minutes * 60 * 1000 + hours * 60 * 60 * 1000 + days * 24 * 60 * 60 * 1000
-  );
-}
-
-export function scheduleNotification(task) {
-  const interval = calculateIntervalInMilliseconds(task.interval);
-
-  const intervalId = setInterval(() => {
-    chrome.notifications.create({
-      type: "basic",
-      iconUrl: chrome.runtime.getURL("img/portada.jpg"),
-      title: task.title,
-      message: task.action.properties.message,
-      priority: 2,
-    });
-  }, interval);
-
-  intervalIds[task.id] = intervalId;
-}
-
-export function stopNotification(taskId) {
-  if (intervalIds[taskId]) {
-    clearInterval(intervalIds[taskId]);
-    delete intervalIds[taskId];
-  }
-}
