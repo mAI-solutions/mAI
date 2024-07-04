@@ -49,8 +49,6 @@ const AccionEditor = ({ accion, opened, onClose, onSend, sendLabel }) => {
         }
       };
 
-  console.log(newAccion);
-
   return (
     <Modal opened={opened} onClose={onClose} centered withCloseButton={false}>
       <Stack>
@@ -119,7 +117,6 @@ const AccionEditor = ({ accion, opened, onClose, onSend, sendLabel }) => {
             variant="filled"
             aria-label={sendLabel}
             onClick={() => {
-              console.log(newAccion);
               onSend(newAccion);
             }}
           >
