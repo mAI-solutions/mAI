@@ -5,6 +5,10 @@ import { useDisclosure } from "@mantine/hooks";
 import { IconEdit, IconTrash, IconDots } from "@tabler/icons-react";
 
 import AccionEditor from "../AccionEditor";
+import {
+  scheduleNotification,
+  stopNotification,
+} from "../../../scripts/helpers";
 
 const AccionCard = ({ accion, onEdit, onDelete }) => {
   const [modalOpened, { open: modalOpen, close: modalClose }] = useDisclosure();
@@ -25,6 +29,8 @@ const AccionCard = ({ accion, onEdit, onDelete }) => {
               Horas, {accion.interval.days} Días
             </Text>
           </div>
+                  stopNotification(accion.id);
+                  scheduleNotification(accion);
           <Menu position="bottom-end">
             <Menu.Target>
               <ActionIcon
