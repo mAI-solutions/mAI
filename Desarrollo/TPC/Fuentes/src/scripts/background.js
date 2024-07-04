@@ -63,7 +63,7 @@ export function scheduleNotification(task) {
   const intervalId = setInterval(() => {
     chrome.notifications.create({
       type: "basic",
-      iconUrl: chrome.runtime.getURL("img/portada.jpg"),
+      iconUrl: chrome.runtime.getURL("img/logo.svg"),
       title: task.title,
       message: task.action.properties.message,
       priority: 2,
