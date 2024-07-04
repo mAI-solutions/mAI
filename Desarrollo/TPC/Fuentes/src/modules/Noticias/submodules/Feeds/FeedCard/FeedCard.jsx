@@ -1,10 +1,11 @@
 import {
   ActionIcon,
   Group,
-  Box,
+  Stack,
   Card,
   Text,
   Menu,
+  Avatar,
 } from '@mantine/core'
 
 import {
@@ -24,17 +25,27 @@ const FeedCard = ({ url, onEdit, onDelete }) => {
     modalOpened, 
     { open: modalOpen, close: modalClose }
   ] = useDisclosure()
+
+  const hostname = new URL(url).hostname
   
   return (
     <>
       <Card>
         <Group 
           justify='space-between' 
+          preventGrowOverflow
         >
-          <Box>
-            <Text w={250} truncate='end'>
-              {url}
-            </Text>
+          <Stack flex={5} gap={5}>
+            <Group gap={7}>
+              <Avatar
+                src={`https://s2.googleusercontent.com/s2/favicons?domain_url=${hostname}`}
+                size={18}
+                radius="xl"
+              />
+              <Text size='sm'>
+                {hostname}
+              </Text>
+            </Group>
             <Text 
               size="xs"
               c="dimmed" 
@@ -44,7 +55,7 @@ const FeedCard = ({ url, onEdit, onDelete }) => {
             >
               {url}
             </Text>
-          </Box>
+          </Stack>
           <Menu position='bottom-end'>
             <Menu.Target>
               <ActionIcon
