@@ -7,7 +7,7 @@ import { removePrefix } from '../../utils/strings';
 import logo from '../../assets/logo.svg';
 
 const openai = new OpenAI({
-  apiKey: 'sk-proj-ecbsA3r59oYVsKPhNSHkT3BlbkFJ9YTcFiMSFM8WZG8K2stY',
+  apiKey: '',
   dangerouslyAllowBrowser: true
 });
 
@@ -91,7 +91,10 @@ const SuperModal = ({ selectedText, onConfirm, onCancel }) => {
         </Box>
         <Box>
           {message ? (
-            <Button onClick={handleClear}>Limpiar</Button>
+              <>
+                  <Button mr={15} onClick={handleClear}>Limpiar</Button>
+                  <Button id="close-button" onClick={onCancel} disabled={loading}>Cerrar</Button>
+              </>
           ) : (
             <>
               <Button id="confirm-button" mr={15} onClick={() => getFixedMsg(tone)} disabled={loading}>

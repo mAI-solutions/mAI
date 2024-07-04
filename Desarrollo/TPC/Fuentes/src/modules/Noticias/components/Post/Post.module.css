@@ -12,8 +12,6 @@
 
 .title {
   display: block;
-  margin-top: var(--mantine-spacing-md);
-  margin-bottom: rem(5px);
 }
 
 .action {
