@@ -13,6 +13,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     chrome.tabs.sendMessage(tab.id, {
       type: "SHOW_MODAL",
       selectedText: info.selectionText,
+      ...info
     });
   }
 });
