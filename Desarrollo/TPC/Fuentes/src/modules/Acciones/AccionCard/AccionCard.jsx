@@ -1,8 +1,15 @@
 import { ActionIcon, Group, Card, Text, Menu } from "@mantine/core";
+import { useState } from "react";
 
 import { useDisclosure } from "@mantine/hooks";
 
-import { IconEdit, IconTrash, IconDots } from "@tabler/icons-react";
+import {
+  IconEdit,
+  IconTrash,
+  IconDots,
+  IconPlayerPlay,
+  IconPlayerStop,
+} from "@tabler/icons-react";
 
 import AccionEditor from "../AccionEditor";
 import {
@@ -12,6 +19,7 @@ import {
 
 const AccionCard = ({ accion, onEdit, onDelete }) => {
   const [modalOpened, { open: modalOpen, close: modalClose }] = useDisclosure();
+  const [active, setActive] = useState(false);
 
   return (
     <>
@@ -29,8 +37,25 @@ const AccionCard = ({ accion, onEdit, onDelete }) => {
               Horas, {accion.interval.days} Días
             </Text>
           </div>
+          <ActionIcon variant="transparent" color="green" aria-label="Iniciar">
+            {active ? (
+              <IconPlayerStop
+                size={20}
+                onClick={() => {
                   stopNotification(accion.id);
+                  setActive(false);
+                }}
+              />
+            ) : (
+              <IconPlayerPlay
+                size={20}
+                onClick={() => {
                   scheduleNotification(accion);
+                  setActive(true);
+                }}
+              />
+            )}
+          </ActionIcon>
           <Menu position="bottom-end">
             <Menu.Target>
               <ActionIcon
