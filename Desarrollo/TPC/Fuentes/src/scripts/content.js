@@ -6,7 +6,7 @@ import SuperModal from '../components/ToneModal';
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log("3.1. Message received in content script", message); // cs: log para verificar llegada del 'muestra modal'
     if (message.type === "SHOW_MODAL" ) {
-
+      console.log(message.info)
       showModal(message.selectedText);
 
     } else if (message.type === "SHOW_MODIFIED_TEXT") {
