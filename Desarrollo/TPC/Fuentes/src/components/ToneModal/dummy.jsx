@@ -3,7 +3,7 @@ import React from 'react';
 const ToneModal = () => {
   return (
     <div>
-      <h1>Tone Modal 7</h1>
+      <h1>Tone Modal 8</h1>
       
 // Dummy line 1
 // Dummy line 2
