@@ -1,18 +1,21 @@
 #!/bin/bash
 
 # Ruta del componente
-COMPONENT_PATH="./src/components/ToneModal/dummy.jsx"
+COMPONENT_PATH="./src/components/ToneModal"
 
 # Crear el directorio si no existe
 mkdir -p $COMPONENT_PATH
 
 # Componente dummy de React
-COMPONENT_CONTENT="import React from 'react';
+commit_component() {
+  local index=$1
+  local file_path="$COMPONENT_PATH/dummy.jsx"
+  local component_content="import React from 'react';
 
 const ToneModal = () => {
   return (
     <div>
-      <h1>Tone Modal</h1>
+      <h1>Tone Modal $index</h1>
     </div>
   );
 };
@@ -20,13 +23,9 @@ const ToneModal = () => {
 export default ToneModal;
 "
 
-# Función para crear el componente y hacer un commit
-commit_component() {
-  local index=$1
-  local file_path="$COMPONENT_PATH"
-  echo "$COMPONENT_CONTENT" > $file_path
-  git add .
-  git commit -m "feat: Add ToneModal component$index"
+  echo "$component_content" > $file_path
+  git add $file_path
+  git commit -m "feat: Add ToneModal component version $index"
 }
 
 # Hacer 10 commits
