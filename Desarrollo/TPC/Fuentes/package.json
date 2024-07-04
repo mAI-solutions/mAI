@@ -26,7 +26,11 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
     "@crxjs/vite-plugin": "^2.0.0-beta.23",
+    "@rollup/plugin-babel": "^6.0.4",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
