@@ -1,20 +1,31 @@
-import { useState } from "react";
-
-import { ActionIcon, Stack, ScrollArea, Affix } from "@mantine/core";
-
+import { useState, useEffect } from "react";
+import {
+  ActionIcon,
+  Stack,
+  ScrollArea,
+  Affix,
+  Center,
+  Loader,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-
 import { IconPlus } from "@tabler/icons-react";
-
 import AccionEditor from "./AccionEditor";
 import AccionCard from "./AccionCard";
 import useTasks from "../../store/useTasks";
+import { updateUserTask } from "../../services/cyclingTasks";
 
 const Acciones = () => {
   const [modalOpened, { open: modalOpen, close: modalClose }] =
     useDisclosure(false);
+  const { tasks, isFetching, refetch } = useTasks(); // Assuming useTasks hook has a refetch method
 
-  const { tasks, isFetching } = useTasks();
+  const [acciones, setAcciones] = useState([]);
+
+  useEffect(() => {
+    if (tasks) {
+      setAcciones(tasks);
+    }
+  }, [tasks]);
 
   if (isFetching) {
     return (
@@ -24,35 +35,48 @@ const Acciones = () => {
     );
   }
 
-  if (!tasks) {
-    return;
-  }
+  const handleAddTask = (newAction) => {
+    const updatedActions = [
+      {
+        id: Math.random() * 1000000,
+        ...newAction,
+      },
+      ...acciones,
+    ];
+    updateUserTask(updatedActions).then(() => {
+      refetch(); // Refetch tasks after updating
+      modalClose();
+    });
+  };
 
-  const [acciones, setAcciones] = useState(tasks);
+  const handleDeleteTask = (taskId) => {
+    const newAcciones = acciones.filter(({ id }) => id !== taskId);
+    setAcciones(newAcciones);
+    updateUserTask(newAcciones).then(() => {
+      refetch(); // Refetch tasks after deleting
+    });
+  };
+
+  const handleEditTask = (updatedTask) => {
+    const newAcciones = acciones.map((a) =>
+      a.id === updatedTask.id ? updatedTask : a,
+    );
+    setAcciones(newAcciones);
+    updateUserTask(newAcciones).then(() => {
+      refetch(); // Refetch tasks after editing
+    });
+  };
 
   return (
     <>
       <ScrollArea>
         <Stack py={20} px={20}>
-          {tasks.map((task) => (
+          {acciones.map((task) => (
             <AccionCard
               key={task.id}
               accion={task}
-              onDelete={() => {
-                const newAcciones = acciones.filter(
-                  ({ id }) => id !== tasks.id,
-                );
-                setAcciones(newAcciones);
-              }}
-              onEdit={(newAccion) => {
-                const newAcciones = acciones.map((a) => {
-                  if (a.id === task.id) {
-                    return newAccion;
-                  }
-                  return a;
-                });
-                setAcciones(newAcciones);
-              }}
+              onDelete={() => handleDeleteTask(task.id)}
+              onEdit={handleEditTask}
             />
           ))}
         </Stack>
@@ -72,16 +96,7 @@ const Acciones = () => {
         opened={modalOpened}
         onClose={modalClose}
         sendLabel="Añadir"
-        onSend={(newAccion) => {
-          setAcciones([
-            {
-              id: Math.random() * 1000000,
-              ...newAccion,
-            },
-            ...acciones,
-          ]);
-          modalClose();
-        }}
+        onSend={handleAddTask}
       />
     </>
   );
