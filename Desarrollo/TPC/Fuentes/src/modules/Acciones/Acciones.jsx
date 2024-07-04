@@ -17,7 +17,7 @@ import { updateUserTask } from "../../services/cyclingTasks";
 const Acciones = () => {
   const [modalOpened, { open: modalOpen, close: modalClose }] =
     useDisclosure(false);
-  const { tasks, isFetching, refetch } = useTasks(); // Assuming useTasks hook has a refetch method
+  const { tasks, isFetching, refetch } = useTasks();
 
   const [acciones, setAcciones] = useState([]);
 
