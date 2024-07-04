@@ -13,7 +13,7 @@ function scheduleNotification(task) {
   const intervalId = setInterval(() => {
     chrome.notifications.create({
       type: "basic",
-      iconUrl: chrome.runtime.getURL("img/portada.jpg"),
+      iconUrl: chrome.runtime.getURL("img/logo_128px.jpg"),
       title: task.title,
       message: task.action.properties.message,
       priority: 2,
@@ -29,7 +29,6 @@ function stopNotification(taskId) {
     delete intervalIds[taskId];
   }
 }
-
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
@@ -51,7 +50,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     chrome.tabs.sendMessage(tab.id, {
       type: "SHOW_MODAL",
       selectedText: info.selectionText,
-      ...info
+      ...info,
     });
   }
 });
