@@ -7,7 +7,7 @@ import { removePrefix } from '../../utils/strings';
 import logo from '../../assets/logo.svg';
 
 const openai = new OpenAI({
-  apiKey: 'sk-proj-C0LE9EDBMlDaD4UQy8NET3BlbkFJiYhHXsxMj5AD9PUmm9Qs',
+  apiKey: 'sk-proj-ecbsA3r59oYVsKPhNSHkT3BlbkFJ9YTcFiMSFM8WZG8K2stY',
   dangerouslyAllowBrowser: true
 });
 
