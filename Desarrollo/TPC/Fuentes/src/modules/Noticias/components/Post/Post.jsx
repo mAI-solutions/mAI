@@ -12,6 +12,7 @@ import {
   Group,
   Center,
   Stack,
+  Spoiler,
   // Badge,
   Avatar,
   Tooltip,
@@ -27,12 +28,15 @@ const Post = (props) => {
     rel: 'noopener noreferrer' 
   };
 
+  console.log(props)
+
   const hostname = new URL(props.link).hostname
   const content = new DOMParser().parseFromString(props.content, 'text/html')
   const desc = content.querySelector('p')?.textContent
-  
   const imageSrc = content.querySelector('img')?.src
-  const thumbSrc = props.extensions?.media?.group?.[0].children?.thumbnail?.[0].attrs.url
+  
+  const thumbAttrs = props.extensions?.media?.group?.[0].children?.thumbnail?.[0].attrs
+  const mediaDesc = props.extensions?.media?.group?.[0].children?.description?.[0].value
 
   return (
     <Card withBorder radius="md" className={classes.card}>
@@ -52,22 +56,37 @@ const Post = (props) => {
             {props.title}
           </Text>
           {
-            desc &&
-            <Text
-              size='xs'
-              c='dimmed'
+            (desc || mediaDesc) &&
+            <Spoiler 
+              maxHeight={100}
+              showLabel="Ver más"
+              hideLabel="Ver menos"
+              styles={{
+                control: {
+                  fontSize: 'var(--mantine-font-size-xs)',
+                }
+              }}
             >
-              {desc}
-            </Text>
+              <Text
+                size='xs'
+                c='dimmed'
+              >
+                {desc || mediaDesc}
+              </Text>
+            </Spoiler>
           }
         </Stack>
 
         {
-          (imageSrc || thumbSrc) &&
+          (imageSrc || thumbAttrs) &&
           <Card.Section>
             <a {...linkProps}>
               <Image 
-                src={imageSrc || thumbSrc} 
+                src={imageSrc || thumbAttrs.url}
+                height={
+                  hostname === 'www.youtube.com'
+                  && 200
+                }
               />
             </a>
           </Card.Section>

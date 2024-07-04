@@ -26,8 +26,6 @@ const Feeds = () => {
   const [feeds, setFeeds] = useState(getAuthUser().noticiasData.urls)
   const [ modalOpened, modalHandlers ] = useDisclosure()
 
-  console.log(feeds)
-
   return (
     <>
       {
