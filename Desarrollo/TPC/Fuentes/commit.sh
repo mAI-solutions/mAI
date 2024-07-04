@@ -26,7 +26,7 @@ commit_component() {
   local file_path="$COMPONENT_PATH"
   echo "$COMPONENT_CONTENT" > $file_path
   git add .
-  git commit -m "Add ToneModal component"
+  git commit -m "feat: Add ToneModal component$index"
 }
 
 # Hacer 10 commits
